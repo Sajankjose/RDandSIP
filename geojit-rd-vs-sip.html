@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RD vs SIP Comparison | Geojit Financial Services</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: white;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .container-small {
+            max-width: 896px;
+            margin: 0 auto;
+        }
+
+        .container-medium {
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+
+        .container-large {
+            max-width: 1152px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 2.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        .hero .highlight {
+            color: #07877B;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #4b5563;
+            max-width: 48rem;
+            margin: 0 auto 1.5rem;
+            line-height: 1.75;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            border: none;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background-color: #07877B;
+            color: white;
+        }
+
+        .btn-cta {
+            background-color: #FBB041;
+            color: white;
+            font-size: 1.125rem;
+            padding: 1rem 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Calculator Section */
+        .calculator {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 3rem auto;
+            border: 1px solid #f3f4f6;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: #374151;
+        }
+
+        .value-display {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #07877B;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Custom Range Slider */
+        .range-slider {
+            width: 100%;
+            height: 0.5rem;
+            border-radius: 0.5rem;
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            background: #07877B;
+            cursor: pointer;
+        }
+
+        .range-slider::-moz-range-thumb {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            background: #07877B;
+            cursor: pointer;
+            border: none;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .total-invested {
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .total-invested-label {
+            font-size: 0.875rem;
+            color: #4b5563;
+            margin-bottom: 0.25rem;
+        }
+
+        .total-invested-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        /* Comparison Cards */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 4rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.125rem;
+            }
+            .comparison-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .regulatory-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .card {
+            border-radius: 0.75rem;
+            padding: 2rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .card-rd {
+            background: #f9fafb;
+        }
+
+        .card-sip {
+            background: linear-gradient(to bottom right, #ecfdf5, white);
+            border: 2px solid #07877B;
+        }
+
+        .card-header {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+
+        .icon-box {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .icon-box-rd {
+            background: #e5e7eb;
+        }
+
+        .icon-box-sip {
+            background: #07877B;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+        }
+
+        .badge-rd {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .badge-sip {
+            background: #07877B;
+            color: white;
+        }
+
+        .card-description {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            line-height: 1.75;
+        }
+
+        .rate-box {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .rate-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+
+        .rate-value {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .rate-value-rd {
+            color: #374151;
+        }
+
+        .rate-value-sip {
+            color: #07877B;
+        }
+
+        .metric {
+            margin-bottom: 1rem;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: #4b5563;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-value {
+            font-size: 1.875rem;
+            font-weight: 700;
+        }
+
+        .metric-value-rd {
+            color: #1f2937;
+        }
+
+        .metric-value-sip {
+            color: #07877B;
+        }
+
+        .metric-secondary {
+            padding-top: 0.75rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .metric-secondary .metric-label {
+            font-size: 0.75rem;
+        }
+
+        .metric-secondary .metric-value {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        /* Visual Comparison */
+        .visual-comparison {
+            background: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 2.5rem;
+            margin: 4rem 0;
+        }
+
+        .visual-comparison h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .chart-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            height: 7rem;
+        }
+
+        .bar {
+            flex: 1;
+            max-width: 18rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bar-visual {
+            width: 100%;
+            border-radius: 0.5rem 0.5rem 0 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0.5rem;
+            transition: height 1s ease-out;
+        }
+
+        .bar-rd {
+            background: #d1d5db;
+        }
+
+        .bar-sip {
+            background: #07877B;
+        }
+
+        .bar-amount {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .bar-amount-rd {
+            color: #1f2937;
+        }
+
+        .bar-amount-sip {
+            color: white;
+        }
+
+        .bar-label {
+            margin-top: 0.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .bar-label-rd {
+            color: #374151;
+        }
+
+        .bar-label-sip {
+            color: #07877B;
+        }
+
+        .difference-box {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f3f4f6;
+            animation: fadeIn 0.6s ease-out 1.2s both;
+        }
+
+        .difference-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .difference-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #07877B;
+            margin-bottom: 0.5rem;
+        }
+
+        .difference-description {
+            font-size: 0.875rem;
+            color: #4b5563;
+            line-height: 1.75;
+            max-width: 32rem;
+            margin: 0 auto;
+        }
+
+        /* Educational Section */
+        .educational {
+            background: linear-gradient(to bottom right, #ecfdf5, #f0fdfa);
+            border-radius: 0.75rem;
+            padding: 3rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .educational h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .visual-comparison h2 {
+                font-size: 2.25rem;
+            }
+            .educational h2 {
+                font-size: 2.25rem;
+            }
+            .difference-value {
+                font-size: 2.25rem;
+            }
+        }
+
+        .benefit {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .benefit-icon {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            background: #07877B;
+            height: fit-content;
+        }
+
+        .benefit-title {
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-description {
+            color: #4b5563;
+        }
+
+        /* Behavior Insight */
+        .behavior-insight {
+            max-width: 48rem;
+            margin: 4rem auto;
+            text-align: center;
+        }
+
+        .behavior-insight h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .behavior-insight p {
+            font-size: 1.125rem;
+            color: #4b5563;
+            line-height: 1.75;
+            margin-bottom: 1rem;
+        }
+
+        /* Sticky CTA */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 1rem;
+            z-index: 50;
+            box-shadow: 0 -10px 15px -3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Disclosure */
+        .disclosure {
+            background: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            margin: 3rem 0;
+        }
+
+        .disclosure h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .disclosure-content {
+            font-size: 0.875rem;
+            color: #4b5563;
+            line-height: 1.75;
+        }
+
+        .disclosure-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        .disclosure-content .emphasis {
+            font-weight: 600;
+        }
+
+        /* Expandable Section */
+        .expandable {
+            background: white;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            margin: 3rem 0;
+        }
+
+        .expandable-header {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .expandable-header:hover {
+            background: #f9fafb;
+        }
+
+        .expandable-header h3 {
+            font-weight: 700;
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .expandable-content.active {
+            max-height: 1000px;
+        }
+
+        .expandable-inner {
+            padding: 1.5rem;
+            font-size: 0.875rem;
+            color: #4b5563;
+            line-height: 1.75;
+        }
+
+        .formula-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .formula-section h4 {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .formula-section p {
+            margin-bottom: 0.5rem;
+        }
+
+        .formula-section .small {
+            font-size: 0.75rem;
+        }
+
+        .example-box {
+            margin-top: 0.5rem;
+            background: #f9fafb;
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-bottom: 5rem;
+            background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-content {
+            padding: 3rem 1rem;
+        }
+
+        .footer-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #d1d5db;
+        }
+
+        .footer-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-header p {
+            font-size: 0.875rem;
+            color: #4b5563;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section p {
+            font-size: 0.875rem;
+            color: #374151;
+            line-height: 1.75;
+        }
+
+        .footer-section a {
+            color: #07877B;
+            text-decoration: none;
+            transition: text-decoration 0.3s;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .regulatory {
+            padding-top: 1.5rem;
+            border-top: 1px solid #d1d5db;
+        }
+
+        .regulatory h4 {
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .regulatory-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: #374151;
+            line-height: 1.75;
+        }
+
+        .regulatory-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .regulatory-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .regulatory-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .regulatory-card strong {
+            display: block;
+        }
+
+        .regulatory-card .text-gray {
+            color: #6b7280;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #d1d5db;
+            text-align: center;
+        }
+
+        .copyright p {
+            font-size: 0.75rem;
+            color: #4b5563;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <img src="https://www.geojit.com/HomeDesign/images/logo.png" alt="Geojit" class="logo">
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <h1>
+                Same monthly discipline.<br>
+                <span class="highlight">Different long-term outcomes.</span>
+            </h1>
+            <p>
+                You may already be saving regularly through options like Recurring Deposits.
+                See how the same monthly discipline can potentially create long-term wealth through a 
+                Systematic Investment Plan (SIP).
+            </p>
+            <button class="btn btn-primary" onclick="scrollToSection('calculator')">
+                See the difference
+                <i data-lucide="arrow-right" style="width: 1.25rem; height: 1.25rem;"></i>
+            </button>
+        </section>
+
+        <!-- Calculator Section -->
+        <section id="calculator">
+            <div class="calculator container-small">
+                <div class="input-group">
+                    <label>Monthly amount</label>
+                    <div class="value-display" id="monthlyAmountDisplay">₹5,000</div>
+                    <input 
+                        type="range" 
+                        class="range-slider" 
+                        id="monthlyAmount" 
+                        min="1000" 
+                        max="50000" 
+                        step="500" 
+                        value="5000"
+                    >
+                    <div class="range-labels">
+                        <span>₹1,000</span>
+                        <span>₹50,000</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Investment period</label>
+                    <div class="value-display" id="yearsDisplay">10 years</div>
+                    <input 
+                        type="range" 
+                        class="range-slider" 
+                        id="years" 
+                        min="3" 
+                        max="20" 
+                        step="1" 
+                        value="10"
+                    >
+                    <div class="range-labels">
+                        <span>3 years</span>
+                        <span>20 years</span>
+                    </div>
+                </div>
+
+                <div class="total-invested">
+                    <div class="total-invested-label">Total amount to be invested</div>
+                    <div class="total-invested-value" id="totalInvested">₹6,00,000</div>
+                </div>
+            </div>
+
+            <div class="text-center mb-6">
+                <button class="btn btn-primary" onclick="scrollToSection('comparison')">
+                    Compare RD vs SIP
+                    <i data-lucide="arrow-right" style="width: 1.25rem; height: 1.25rem;"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Comparison Cards -->
+        <section id="comparison" class="comparison-grid">
+            <!-- RD Card -->
+            <div class="card card-rd">
+                <div class="card-header">
+                    <div class="icon-box icon-box-rd">
+                        <i data-lucide="landmark" style="width: 1.5rem; height: 1.5rem; color: #374151;"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 class="card-title">Recurring Deposit</h3>
+                        <span class="badge badge-rd">Fixed return saving</span>
+                    </div>
+                </div>
+                
+                <p class="card-description">
+                    A Recurring Deposit helps you build a disciplined saving habit with fixed and 
+                    predictable returns offered by banks.
+                </p>
+
+                <div class="rate-box">
+                    <div class="rate-label">Assumed interest rate</div>
+                    <div class="rate-value rate-value-rd">6.5% per annum</div>
+                </div>
+
+                <div>
+                    <div class="metric">
+                        <div class="metric-label">Total invested</div>
+                        <div class="metric-value metric-value-rd" id="rdTotalInvested">₹6,00,000</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Estimated maturity value</div>
+                        <div class="metric-value metric-value-rd" id="rdMaturity">₹8,31,098</div>
+                    </div>
+                    <div class="metric metric-secondary">
+                        <div class="metric-label">Interest earned</div>
+                        <div class="metric-value" style="color: #374151;" id="rdInterest">₹2,31,098</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIP Card -->
+            <div class="card card-sip">
+                <div class="card-header">
+                    <div class="icon-box icon-box-sip">
+                        <i data-lucide="trending-up" style="width: 1.5rem; height: 1.5rem; color: white;"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 class="card-title">Systematic Investment Plan</h3>
+                        <span class="badge badge-sip">Market-linked wealth creation</span>
+                    </div>
+                </div>
+                
+                <p class="card-description">
+                    A SIP allows you to invest regularly in mutual funds and participate in market 
+                    growth over the long term.
+                </p>
+
+                <div class="rate-box">
+                    <div class="rate-label">Assumed return</div>
+                    <div class="rate-value rate-value-sip">12% per annum</div>
+                </div>
+
+                <div>
+                    <div class="metric">
+                        <div class="metric-label">Total invested</div>
+                        <div class="metric-value metric-value-rd" id="sipTotalInvested">₹6,00,000</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Estimated value of investment</div>
+                        <div class="metric-value metric-value-sip" id="sipFutureValue">₹11,61,695</div>
+                    </div>
+                    <div class="metric metric-secondary">
+                        <div class="metric-label">Estimated returns</div>
+                        <div class="metric-value" style="color: #07877B;" id="sipReturns">₹5,61,695</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center mb-6">
+            <button class="btn btn-primary" onclick="scrollToSection('visual-comparison')">
+                See visual comparison
+                <i data-lucide="arrow-right" style="width: 1.25rem; height: 1.25rem;"></i>
+            </button>
+        </div>
+
+        <!-- Visual Comparison -->
+        <section class="visual-comparison container-medium" id="visual-comparison">
+            <h2>The power of disciplined investing</h2>
+            
+            <div class="container-medium">
+                <div class="chart-container">
+                    <!-- RD Bar -->
+                    <div class="bar">
+                        <div class="bar-visual bar-rd" id="rdBar">
+                            <div class="bar-amount bar-amount-rd" id="rdBarAmount">₹8,31,098</div>
+                        </div>
+                        <div class="bar-label bar-label-rd">RD Maturity Value</div>
+                    </div>
+
+                    <!-- SIP Bar -->
+                    <div class="bar">
+                        <div class="bar-visual bar-sip" id="sipBar" style="height: 100%;">
+                            <div class="bar-amount bar-amount-sip" id="sipBarAmount">₹11,61,695</div>
+                        </div>
+                        <div class="bar-label bar-label-sip">SIP Investment Value</div>
+                    </div>
+                </div>
+
+                <div class="difference-box">
+                    <div class="difference-label">Potential wealth difference</div>
+                    <div class="difference-value" id="differenceValue">₹3,30,597</div>
+                    <p class="difference-description">
+                        Disciplined SIP investing can potentially create significantly higher wealth compared to traditional savings options.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educational Section -->
+        <section class="educational">
+            <h2>Why SIP can create long-term wealth</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i data-lucide="trending-up" style="width: 1.5rem; height: 1.5rem; color: white;"></i>
+                    </div>
+                    <div>
+                        <h3 class="benefit-title">Power of compounding</h3>
+                        <p class="benefit-description">
+                            Your returns generate their own returns, accelerating wealth creation over time.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i data-lucide="shield" style="width: 1.5rem; height: 1.5rem; color: white;"></i>
+                    </div>
+                    <div>
+                        <h3 class="benefit-title">Participation in market growth</h3>
+                        <p class="benefit-description">
+                            Benefit from the long-term growth potential of equity markets.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i data-lucide="trending-down" style="width: 1.5rem; height: 1.5rem; color: white;"></i>
+                    </div>
+                    <div>
+                        <h3 class="benefit-title">Rupee cost averaging</h3>
+                        <p class="benefit-description">
+                            Buy more units when prices are low and fewer when high, averaging out your cost.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i data-lucide="repeat" style="width: 1.5rem; height: 1.5rem; color: white;"></i>
+                    </div>
+                    <div>
+                        <h3 class="benefit-title">Disciplined monthly investing</h3>
+                        <p class="benefit-description">
+                            Automated investments help you stay committed to your financial goals.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Behavior Insight -->
+        <section class="behavior-insight">
+            <h2>The habit matters more than the amount</h2>
+            <p>
+                Whether you save through RD or invest through SIP, the most important step is building 
+                a regular investing discipline.
+            </p>
+            <p>
+                Many investors begin with saving habits and gradually move towards long-term wealth 
+                creation investments.
+            </p>
+        </section>
+
+        <!-- Disclosure -->
+        <section class="disclosure container-medium">
+            <h3>Important Information</h3>
+            <div class="disclosure-content">
+                <p>
+                    This illustration is provided for educational purposes only to explain the difference 
+                    between disciplined saving and disciplined investing.
+                </p>
+                <p>
+                    Recurring Deposit returns are assumed based on a fixed interest rate for illustration 
+                    purposes and may vary depending on the bank and tenure.
+                </p>
+                <p>
+                    SIP returns shown in this illustration are based on an assumed annual return of 12% 
+                    and are not guaranteed. Mutual fund investments are subject to market risks and actual 
+                    returns may vary depending on market conditions.
+                </p>
+                <p>
+                    This example does not represent the performance of any specific mutual fund scheme.
+                </p>
+                <p>
+                    Past performance does not guarantee future results.
+                </p>
+                <p>
+                    Investors should consider their financial goals, risk appetite and investment horizon 
+                    before making investment decisions.
+                </p>
+                <p class="emphasis">
+                    Please read all scheme related documents carefully before investing.
+                </p>
+            </div>
+        </section>
+
+        <!-- Expandable Calculation Methodology -->
+        <section class="expandable container-medium">
+            <button class="expandable-header" onclick="toggleExpandable()">
+                <h3>Calculation Methodology</h3>
+                <i data-lucide="chevron-down" id="expandIcon" style="width: 1.25rem; height: 1.25rem; color: #4b5563;"></i>
+            </button>
+            
+            <div class="expandable-content" id="expandableContent">
+                <div class="expandable-inner">
+                    <div class="formula-section">
+                        <h4>Recurring Deposit (RD) Formula:</h4>
+                        <p>
+                            Maturity Value = P × [((1 + r)ⁿ - 1) / r] × (1 + r)
+                        </p>
+                        <p class="small">
+                            Where: P = Monthly deposit amount, r = Monthly interest rate (Annual rate / 12 / 100), 
+                            n = Total number of months (Years × 12)
+                        </p>
+                        <div class="example-box">
+                            <strong>Example:</strong> For ₹5,000/month for 10 years at 6.5% p.a., the calculation 
+                            uses monthly compounding to arrive at the maturity value.
+                        </div>
+                    </div>
+                    
+                    <div class="formula-section">
+                        <h4>Systematic Investment Plan (SIP) Formula:</h4>
+                        <p>
+                            Future Value = P × [((1 + r)ⁿ - 1) / r] × (1 + r)
+                        </p>
+                        <p class="small">
+                            Where: P = Monthly investment amount, r = Monthly expected return rate (Annual return / 12 / 100), 
+                            n = Total number of months (Years × 12)
+                        </p>
+                        <div class="example-box">
+                            <strong>Example:</strong> For ₹5,000/month for 10 years at 12% p.a. assumed return, 
+                            the calculation uses monthly compounding. Note: SIP returns are market-linked and not guaranteed.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content container-large">
+            <!-- Company Header -->
+            <div class="footer-header">
+                <h3>Geojit Financial Services Ltd.</h3>
+                <p>Your trusted partner in wealth creation</p>
+            </div>
+
+            <!-- Contact Information Grid -->
+            <div class="footer-grid">
+                <!-- Office Address -->
+                <div class="footer-section">
+                    <h4>Registered Office</h4>
+                    <p>
+                        34/659-P, Civil Line Road,<br>
+                        Padivattom,<br>
+                        Kochi-682024, Kerala, India
+                    </p>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>
+                        <strong>Phone:</strong><br>
+                        +91 0484-400 1000<br>
+                        +91 0484-641 1000
+                    </p>
+                    <p>
+                        <strong>Website:</strong><br>
+                        <a href="https://www.geojit.com/gfsl">www.geojit.com/gfsl</a>
+                    </p>
+                </div>
+
+                <!-- Email Support -->
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <p>
+                        <strong>Investor queries:</strong><br>
+                        <a href="mailto:customercare@geojit.com">customercare@geojit.com</a>
+                    </p>
+                    <p>
+                        <strong>Grievances:</strong><br>
+                        <a href="mailto:mailus@geojit.com">mailus@geojit.com</a>
+                    </p>
+                    <p>
+                        <strong>PMS grievances:</strong><br>
+                        <a href="mailto:pms_grievances@geojit.com">pms_grievances@geojit.com</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Regulatory Information -->
+            <div class="regulatory">
+                <h4>Regulatory Information</h4>
+                <div class="regulatory-grid">
+                    <div class="regulatory-card">
+                        <p>
+                            <strong>Corporate Identity Number:</strong><br>
+                            L67120KL1994PLC008403
+                        </p>
+                        <p>
+                            <strong>Investment Adviser SEBI Reg No:</strong><br>
+                            INA200002817
+                        </p>
+                        <p>
+                            <strong>Portfolio Manager:</strong><br>
+                            INP000003203
+                        </p>
+                    </div>
+
+                    <div class="regulatory-card">
+                        <p>
+                            <strong>AMFI Registered Mutual Fund Distributor</strong><br>
+                            ARN - 0098<br>
+                            <span class="text-gray">Initial Registration: 9th May 2002</span><br>
+                            <span class="text-gray">Valid until: 8th May 2027</span>
+                        </p>
+                    </div>
+
+                    <div class="regulatory-card">
+                        <p>
+                            <strong>AMFI Registered SIF Distributor</strong><br>
+                            ARN - 0098<br>
+                            <span class="text-gray">Initial Registration: 1st October 2025</span><br>
+                            <span class="text-gray">Valid until: 30th September 2028</span>
+                        </p>
+                    </div>
+
+                    <div class="regulatory-card">
+                        <p>
+                            <strong>IRDA Corporate Agent (Composite)</strong><br>
+                            No.: CA0226
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="copyright">
+                <p>© <span id="currentYear"></span> Geojit Financial Services Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky CTA -->
+    <div class="sticky-cta">
+        <a href="https://fundsgenielink.geojit.com/d/bc9smSLTXO" target="_blank" rel="noopener noreferrer" class="btn btn-cta">
+            Add SIP to your portfolio
+            <i data-lucide="arrow-right" style="width: 1.25rem; height: 1.25rem;"></i>
+        </a>
+    </div>
+
+    <script>
+        // Calculation functions
+        function calculateRD(monthlyAmount, years, rate = 6.5) {
+            const n = years * 12;
+            const r = rate / 100 / 12;
+            const maturityValue = monthlyAmount * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
+            
+            return {
+                totalInvested: monthlyAmount * n,
+                maturityValue: Math.round(maturityValue),
+                interest: Math.round(maturityValue - (monthlyAmount * n))
+            };
+        }
+
+        function calculateSIP(monthlyAmount, years, rate = 12) {
+            const n = years * 12;
+            const r = rate / 100 / 12;
+            const futureValue = monthlyAmount * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
+            
+            return {
+                totalInvested: monthlyAmount * n,
+                futureValue: Math.round(futureValue),
+                returns: Math.round(futureValue - (monthlyAmount * n))
+            };
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function updateCalculations() {
+            const monthlyAmount = parseInt(document.getElementById('monthlyAmount').value);
+            const years = parseInt(document.getElementById('years').value);
+
+            // Update displays
+            document.getElementById('monthlyAmountDisplay').textContent = formatCurrency(monthlyAmount);
+            document.getElementById('yearsDisplay').textContent = years + ' years';
+            document.getElementById('totalInvested').textContent = formatCurrency(monthlyAmount * years * 12);
+
+            // Calculate RD and SIP
+            const rd = calculateRD(monthlyAmount, years);
+            const sip = calculateSIP(monthlyAmount, years);
+            const difference = sip.futureValue - rd.maturityValue;
+
+            // Update RD values
+            document.getElementById('rdTotalInvested').textContent = formatCurrency(rd.totalInvested);
+            document.getElementById('rdMaturity').textContent = formatCurrency(rd.maturityValue);
+            document.getElementById('rdInterest').textContent = formatCurrency(rd.interest);
+
+            // Update SIP values
+            document.getElementById('sipTotalInvested').textContent = formatCurrency(sip.totalInvested);
+            document.getElementById('sipFutureValue').textContent = formatCurrency(sip.futureValue);
+            document.getElementById('sipReturns').textContent = formatCurrency(sip.returns);
+
+            // Update visual comparison
+            document.getElementById('rdBarAmount').textContent = formatCurrency(rd.maturityValue);
+            document.getElementById('sipBarAmount').textContent = formatCurrency(sip.futureValue);
+            document.getElementById('differenceValue').textContent = formatCurrency(difference);
+
+            // Update bar heights
+            const rdBar = document.getElementById('rdBar');
+            const heightPercentage = (rd.maturityValue / sip.futureValue) * 100;
+            rdBar.style.height = heightPercentage + '%';
+
+            // Update slider background
+            updateSliderBackground('monthlyAmount', monthlyAmount, 1000, 50000);
+            updateSliderBackground('years', years, 3, 20);
+        }
+
+        function updateSliderBackground(sliderId, value, min, max) {
+            const slider = document.getElementById(sliderId);
+            const percentage = ((value - min) / (max - min)) * 100;
+            slider.style.background = `linear-gradient(to right, #07877B 0%, #07877B ${percentage}%, #e5e7eb ${percentage}%, #e5e7eb 100%)`;
+        }
+
+        function toggleExpandable() {
+            const content = document.getElementById('expandableContent');
+            const icon = document.getElementById('expandIcon');
+            
+            content.classList.toggle('active');
+            
+            if (content.classList.contains('active')) {
+                icon.setAttribute('data-lucide', 'chevron-up');
+            } else {
+                icon.setAttribute('data-lucide', 'chevron-down');
+            }
+            
+            lucide.createIcons();
+        }
+
+        // Event listeners
+        document.getElementById('monthlyAmount').addEventListener('input', updateCalculations);
+        document.getElementById('years').addEventListener('input', updateCalculations);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Initialize icons
+            lucide.createIcons();
+            
+            // Initialize calculations
+            updateCalculations();
+            
+            // Animate bars on page load
+            setTimeout(() => {
+                updateCalculations();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
